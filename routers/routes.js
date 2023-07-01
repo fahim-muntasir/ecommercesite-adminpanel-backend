@@ -6,6 +6,7 @@ const {
     userPostController,
     userUpdateController,
     userDeleteController,
+    userLoginController,
 } = require("../controller/user/userController");
 const {
     userValidation,
@@ -27,6 +28,9 @@ router.post(
 
 router.put("/user", userUpdateController);
 router.delete("/user", userDeleteController);
+
+// LOGIN
+router.post("/login", userLoginController);
 
 // exports module
 module.exports = router;
