@@ -6,9 +6,6 @@ const server = http.createServer(app);
 const DBConnect = require("./db/db_connection");
 const userRouter = require("./routers/routes");
 
-// router
-app.use(userRouter);
-
 // database connection and app run
 DBConnect()
     .then(() => {

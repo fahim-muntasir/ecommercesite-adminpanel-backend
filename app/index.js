@@ -7,6 +7,7 @@ const app = express();
 
 app.use(middleware);
 app.use(require("./router"));
+app.use("/api/", require("../routers/routes"));
 app.use(notfound);
 app.use(globalError);
 

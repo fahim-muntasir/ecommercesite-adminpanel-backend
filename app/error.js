@@ -7,12 +7,12 @@ const notfound = (_req, _res, next) => {
 const globalError = (error, _req, res, _next) => {
     if (error.status) {
         return res.status(error.status).json({
-            message: error.message,
+            msg: error.message,
         });
     }
-
+    console.log(error);
     res.status(500).json({
-        message: "Something went wrong!",
+        msg: "Something went wrong!",
     });
 };
 
