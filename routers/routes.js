@@ -13,7 +13,13 @@ const {
 } = require("../controller/user/userController");
 
 // CATEGORY CONTROLLER
-const { categoryPostController } = require("../controller/category");
+const {
+    categoryPostController,
+    categoryGetController,
+} = require("../controller/category");
+
+// IMPORT PRODUCT CONTROLLER
+const { productPostController } = require("../controller/product");
 
 // IMPORT VALIDATOR
 const {
@@ -40,8 +46,14 @@ router.put("/user", userUpdateController);
 // USER DELETE ROUTE
 router.delete("/user", userDeleteController);
 
+// GET CATEGORY ROUTE
+router.get("/category", categoryGetController);
+
 // CATEGORY CREATE ROUTE
 router.post("/category", categoryPostController);
+
+// CREATE PRODUCT
+router.post("/products", productPostController);
 
 // LOGIN
 router.post("/login", userLoginController);
