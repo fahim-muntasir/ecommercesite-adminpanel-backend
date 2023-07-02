@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+// IMPORT CONTROLLER
+
+// USER CONTROLLER
 const {
     userGetController,
     userPostController,
@@ -8,6 +11,11 @@ const {
     userDeleteController,
     userLoginController,
 } = require("../controller/user/userController");
+
+// CATEGORY CONTROLLER
+const { categoryPostController } = require("../controller/category");
+
+// IMPORT VALIDATOR
 const {
     userValidation,
     userValidationCheck,
@@ -15,9 +23,11 @@ const {
 // const sendMail = require("../middleware/sendMail");
 const avatarUpload = require("../middleware/avaterupload");
 
-// user create route
-router.get("/user", userGetController);
+// ALL ROUTE
 
+// USER GET ROUTE
+router.get("/user", userGetController);
+// USER CREATE ROUTE
 router.post(
     "/user",
     avatarUpload,
@@ -25,9 +35,13 @@ router.post(
     userValidationCheck,
     userPostController
 );
-
+// USER UPDATE ROUTE
 router.put("/user", userUpdateController);
+// USER DELETE ROUTE
 router.delete("/user", userDeleteController);
+
+// CATEGORY CREATE ROUTE
+router.post("/category", categoryPostController);
 
 // LOGIN
 router.post("/login", userLoginController);
