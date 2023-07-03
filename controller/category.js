@@ -1,10 +1,42 @@
 const Category = require("../schema/category");
 
-// GET CATEGORY CONTROLLER
-const categoryGet = async (req, res) => {
+// GET ALL CATEGORIES CONTROLLER
+const allCategoriesGet = async (req, res) => {
     try {
         // Get categories with null parentId
-        const parentCategories = await Category.find();
+        const categories = await Category.find();
+
+        // send response
+        res.status(200).json(categories);
+    } catch (error) {
+        res.status(500).json({
+            msg: "An error occurred while retrieving categories",
+        });
+    }
+};
+
+// GET ROOT CATEGORY CONTROLLER
+const parentCategoryGet = async (req, res) => {
+    try {
+        // Get categories with null parentId
+        const categories = await Category.find({ parentId: null });
+
+        // send response
+        res.status(200).json(categories);
+    } catch (error) {
+        res.status(500).json({
+            msg: "An error occurred while retrieving categories",
+        });
+    }
+};
+
+// GET CATEGORY BY ID CONTROLLER
+const categoryGetById = async (req, res) => {
+    const { parentId } = req.params;
+
+    try {
+        // Get categories with null parentId
+        const parentCategories = await Category.find({ parentId });
 
         // send response
         res.status(200).json(parentCategories);
@@ -13,34 +45,6 @@ const categoryGet = async (req, res) => {
             msg: "An error occurred while retrieving categories",
         });
     }
-
-    // const { parentId } = req.query;
-
-    // if (parentId) {
-    //     try {
-    //         // Get categories that match the parentId
-    //         const matchedCategories = await Category.find({ parentId });
-
-    //         // send response
-    //         res.status(200).json(matchedCategories);
-    //     } catch (error) {
-    //         res.status(500).json({
-    //             msg: "An error occurred while retrieving categories",
-    //         });
-    //     }
-    // } else {
-    //     try {
-    //         // Get categories with null parentId
-    //         const parentCategories = await Category.find({ parentId: null });
-
-    //         // send response
-    //         res.status(200).json(parentCategories);
-    //     } catch (error) {
-    //         res.status(500).json({
-    //             msg: "An error occurred while retrieving categories",
-    //         });
-    //     }
-    // }
 };
 
 // CREATE CATEGORY CONTROLLER
@@ -83,6 +87,8 @@ const categoryPost = async (req, res) => {
 };
 
 module.exports = {
-    categoryGetController: categoryGet,
+    allCategoryGetController: allCategoriesGet,
+    parentCategoryGetController: parentCategoryGet,
     categoryPostController: categoryPost,
+    categoryGetByIdController: categoryGetById,
 };

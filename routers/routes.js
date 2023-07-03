@@ -15,7 +15,9 @@ const {
 // CATEGORY CONTROLLER
 const {
     categoryPostController,
-    categoryGetController,
+    allCategoryGetController,
+    parentCategoryGetController,
+    categoryGetByIdController,
 } = require("../controller/category");
 
 // IMPORT PRODUCT CONTROLLER
@@ -46,8 +48,14 @@ router.put("/user", userUpdateController);
 // USER DELETE ROUTE
 router.delete("/user", userDeleteController);
 
-// GET CATEGORY ROUTE
-router.get("/category", categoryGetController);
+// GET ALL CATEGORY ROUTE
+router.get("/category/all", allCategoryGetController);
+
+// GET ALL ROOT CATEGORY ROUTE
+router.get("/category", parentCategoryGetController);
+
+// GET CATEGORY BY ID ROUTE
+router.get("/category/:parentId", categoryGetByIdController);
 
 // CATEGORY CREATE ROUTE
 router.post("/category", categoryPostController);
