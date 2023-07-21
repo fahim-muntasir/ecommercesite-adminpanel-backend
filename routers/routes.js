@@ -21,7 +21,7 @@ const {
 } = require("../controller/category");
 
 // IMPORT PRODUCT CONTROLLER
-const { productPostController } = require("../controller/product");
+const { productPostController, productGetController } = require("../controller/product");
 
 // IMPORT VALIDATOR
 const {
@@ -62,6 +62,12 @@ router.post("/category", categoryPostController);
 
 // CREATE PRODUCT
 router.post("/products", productPostController);
+
+// GET ALL PRODUCTS
+router.get("/products", productGetController);
+
+// GET ALL PRODUCTS
+router.get("/products/:category", productGetController);
 
 // LOGIN
 router.post("/login", userLoginController);
