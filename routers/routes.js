@@ -55,7 +55,7 @@ router.get("/category/all", allCategoryGetController);
 router.get("/category", parentCategoryGetController);
 
 // GET CATEGORY BY ID ROUTE
-router.get("/category/:parentId", categoryGetByIdController);
+router.get("/category/:category", categoryGetByIdController);
 
 // CATEGORY CREATE ROUTE
 router.post("/category", categoryPostController);
