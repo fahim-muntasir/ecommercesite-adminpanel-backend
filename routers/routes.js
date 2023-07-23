@@ -21,7 +21,9 @@ const {
 } = require("../controller/category");
 
 // IMPORT PRODUCT CONTROLLER
-const { productPostController, productGetController } = require("../controller/product");
+const { productPostController, productGetController, productAvatarController, getProductsAvatarController } = require("../controller/product");
+
+const checkLogin = require("../middleware/checkLogin");
 
 // IMPORT VALIDATOR
 const {
@@ -30,6 +32,7 @@ const {
 } = require("../utils/users/userAddValidation");
 // const sendMail = require("../middleware/sendMail");
 const avatarUpload = require("../middleware/avaterupload");
+const productAvaterUpload = require("../middleware/productAvaterUpload");
 
 // ALL ROUTE
 
@@ -68,6 +71,12 @@ router.get("/products", productGetController);
 
 // GET ALL PRODUCTS
 router.get("/products/:category", productGetController);
+
+// PRODUCTS AVATAR UPLOAD ROUTE
+router.post("/products/avater", checkLogin, productAvaterUpload, productAvatarController);
+
+// GET PRODUCTS AVATAR
+router.get("/productavatars", checkLogin, getProductsAvatarController);
 
 // LOGIN
 router.post("/login", userLoginController);

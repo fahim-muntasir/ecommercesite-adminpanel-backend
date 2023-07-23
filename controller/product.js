@@ -1,5 +1,7 @@
 const Product = require("../schema/product");
 const Category = require("../schema/category");
+const fs = require('fs');
+const path = require('path');
 
 // GET PRODUCT CONTROLLER
 const productGet = async (req, res) => {
@@ -82,7 +84,32 @@ const productPost = async (req, res) => {
   }
 };
 
+const avatarController = (req, res) => {
+  if (req.files.length > 0) {
+    console.log(req.files);
+    res
+      .status(201)
+      .json({ msg: "Avatar upload successfull.", data: req.files });
+  } else {
+    res.status(400).json({ msg: "Please select images then try to upload!" });
+  }
+};
+
+const filesDirectory = path.join(__dirname, '../public/uploads/products');
+const getAvatars = (req, res) =>{
+  fs.readdir(filesDirectory, (err, files) => {
+    if (err) {
+      console.error('Error reading directory:', err);
+      res.status(500).json({ msg: 'Internal Server Error' });
+    } else {
+      res.status(200).json({msg: "Avater get successfull", data: files });
+    }
+  });
+}
+
 module.exports = {
   productGetController: productGet,
   productPostController: productPost,
+  productAvatarController: avatarController,
+  getProductsAvatarController: getAvatars
 };
