@@ -55,16 +55,20 @@ const productGet = async (req, res) => {
 
 // CREATE PRODUCT CONTROLLER
 const productPost = async (req, res) => {
-  const { title, description, price, slag, category } = req.body;
-
+  const { title, description, price, slag, category, thumbnail, images } = req.body;
+  console.log(req?.user);
+  console.log(req.body)
   try {
     if (title && description && price && slag && category) {
       const newProduct = new Product({
         title,
+        user: req?.user?.userId,
         description,
         price,
         slag,
         category,
+        thumbnail,
+        images
       });
 
       // product save

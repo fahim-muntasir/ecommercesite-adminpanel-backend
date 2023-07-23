@@ -31,7 +31,7 @@ const parentCategoryGet = async (req, res) => {
 };
 
 // GET CATEGORY BY CATEGORY NAME CONTROLLER
-const categoryGetById = async (req, res) => {
+const categoryGetByName = async (req, res) => {
   const { category } = req.params;
 
   try {
@@ -40,6 +40,24 @@ const categoryGetById = async (req, res) => {
 
     // Get categories with null parentId
     const parentCategories = await Category.find({ parentId: _id });
+
+    // send response
+    res.status(200).json({msg: "get category successfull", data: parentCategories});
+  } catch (error) {
+    res.status(500).json({
+      msg: "An error occurred while retrieving categories",
+    });
+  }
+};
+
+// GET CATEGORY BY CATEGORY ID CONTROLLER
+const categoryGetById = async (req, res) => {
+  const { categoryId } = req.params;
+
+  try {
+
+    // Get categories with null parentId
+    const parentCategories = await Category.find({ parentId: categoryId });
 
     // send response
     res.status(200).json({msg: "get category successfull", data: parentCategories});
@@ -94,4 +112,5 @@ module.exports = {
   parentCategoryGetController: parentCategoryGet,
   categoryPostController: categoryPost,
   categoryGetByIdController: categoryGetById,
+  categoryGetByNameController: categoryGetByName
 };
